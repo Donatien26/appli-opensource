@@ -2,14 +2,12 @@ package com.example.appliopensource.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import com.example.appliopensource.model.Utilisateur;
 import com.example.appliopensource.service.UtilisateurService;
 
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
@@ -35,8 +33,6 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 		authentication.getName();
 		Utilisateur utilisateur = new Utilisateur();
 		utilisateur.setIdep(authentication.getName());
-		utilisateur.setRoles(authentication.getAuthorities().stream().map(GrantedAuthority::getAuthority)
-				.map(String::toUpperCase).collect(Collectors.toList()));
 		return utilisateur;
 	}
 

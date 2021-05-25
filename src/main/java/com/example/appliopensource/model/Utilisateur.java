@@ -1,12 +1,13 @@
 package com.example.appliopensource.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Utilisateur {
 
 	private String idep;
 	private String nom;
-	private List<String> roles;
+	private List<String> roleApp = new ArrayList<>();
 
 	public Utilisateur() {
 	}
@@ -32,11 +33,16 @@ public class Utilisateur {
 		this.nom = nom;
 	}
 
-	public List<String> getRoles() {
-		return this.roles;
+	public List<String> getRoleApp() {
+		return this.roleApp;
 	}
 
-	public void setRoles(List<String> roles) {
-		this.roles = roles;
+	public void setRoleApp(List<String> roleApp) {
+		this.roleApp = roleApp;
 	}
+
+	public void addRoleApp(String roleApp) {
+		this.roleApp.add(roleApp);
+	}
+
 }
