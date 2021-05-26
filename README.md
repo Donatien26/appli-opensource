@@ -1,1 +1,1 @@
-Une appli opensource
+Une appli (Bientot) opensource

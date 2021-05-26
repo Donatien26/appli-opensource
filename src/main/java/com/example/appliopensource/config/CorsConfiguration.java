@@ -1,22 +1,20 @@
 package com.example.appliopensource.config;
 
-import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
-@ConfigurationProperties("security.cors")
 public class CorsConfiguration {
 
     /** Pattern of urls accepted by CORS protection */
     private String PATH_PATTERN = "/**";
 
     /** Array of origins allowed to connect */
-    private String[] allowedOrigins = {};
+    private String[] allowedOrigins = { "http://localhost:8080" };
 
-    private String[] allowedMethods = {};
+    private String[] allowedMethods = { "*" };
 
     @Bean
     public WebMvcConfigurer corsConfigurer() {
