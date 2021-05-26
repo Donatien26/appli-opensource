@@ -8,6 +8,7 @@ public class Utilisateur {
 	private String idep;
 	private String nom;
 	private List<String> roleApp = new ArrayList<>();
+	private String phone;
 
 	public Utilisateur() {
 	}
@@ -43,6 +44,14 @@ public class Utilisateur {
 
 	public void addRoleApp(String roleApp) {
 		this.roleApp.add(roleApp);
+	}
+
+	public String getPhone() {
+		return this.phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 
 }

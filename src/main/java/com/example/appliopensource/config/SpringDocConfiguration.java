@@ -38,6 +38,9 @@ public class SpringDocConfiguration {
     @Value("${springdoc.contact.email:}")
     public String contactEmail;
 
+    @Value("${springdoc.title:}")
+    public String title;
+
     @Autowired
     BuildProperties buildProperties;
 
@@ -66,7 +69,7 @@ public class SpringDocConfiguration {
         if (contactEmail != null) {
             contact = contact.email(contactEmail).name(contactEmail);
         }
-        final OpenAPI openapi = new OpenAPI().info(new Info().title("Swagger SUGOI")
+        final OpenAPI openapi = new OpenAPI().info(new Info().title(title)
                 .description("Sugoi aims to provide a tool to manage users with multi tenancy in mind.")
                 .version(buildProperties.getVersion())
                 .license(new License().name("Apache 2.0").url("http://www.apache.org/licenses/LICENSE-2.0.html"))
