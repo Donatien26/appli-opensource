@@ -2,8 +2,6 @@ package com.example.appliopensource.controller;
 
 import java.util.List;
 
-import javax.annotation.security.RolesAllowed;
-
 import com.example.appliopensource.model.Utilisateur;
 import com.example.appliopensource.service.UtilisateurService;
 
@@ -20,7 +18,6 @@ public class UtilisateurController {
 	private UtilisateurService utilisateurService;
 
 	@GetMapping
-	@RolesAllowed("ADMIN_TOUCAN")
 	public List<Utilisateur> findUtilisateur() {
 		return utilisateurService.findAll();
 	}

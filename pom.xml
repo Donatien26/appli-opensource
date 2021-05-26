@@ -39,31 +39,27 @@
 		</dependency>
 
 		<dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
-			<scope>runtime</scope>
-		</dependency>
-
-		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
 			<scope>runtime</scope>
 		</dependency>
 
 		<dependency>
-			<groupId>org.springdoc</groupId>
-			<artifactId>springdoc-openapi-security</artifactId>
-			<version>1.5.8</version>
+			<groupId>org.keycloak</groupId>
+			<artifactId>keycloak-spring-boot-starter</artifactId>
+			<version>9.0.2</version>
 		</dependency>
 
+
 		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-ldap</artifactId>
+			<groupId>fr.insee.igesa</groupId>
+			<artifactId>igesa-xml-beans</artifactId>
+			<version>2.0-SNAPSHOT</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
+			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
 
 
@@ -85,6 +81,7 @@
 		</dependency>
 	</dependencies>
 
+
 	<build>
 		<plugins>
 			<!-- To create a second jar with only sources no container servlet (no fatjar) -->
@@ -98,15 +95,8 @@
 							<goal>build-info</goal>
 						</goals>
 					</execution>
-					<execution>
-						<id>repackage</id>
-						<configuration>
-							<classifier>exec</classifier>
-						</configuration>
-					</execution>
 				</executions>
 			</plugin>
 		</plugins>
 	</build>
-
 </project>
