@@ -31,8 +31,8 @@ deploy review on kub:
     name: thisiskj/kubectl-envsubst
     entrypoint: ["/bin/sh", "-c"]
   script:
-    - envsubst < .ci/kubernetes/ci.yaml
-    - envsubst < .ci/kubernetes/ci.yaml | kubectl --token $KUB_TOKEN --server $KUB_SERVER --namespace $KUB_NAMESPACE --insecure-skip-tls-verify=true replace --force -f -
+    - envsubst < .ci/ci.yaml
+    - envsubst < .ci/ci.yaml | kubectl --token $KUB_TOKEN --server $KUB_SERVER --namespace $KUB_NAMESPACE --insecure-skip-tls-verify=true replace --force -f -
   environment:
     name: review/$CI_COMMIT_REF_SLUG
     url: https://appli-opensource-${CI_COMMIT_REF_SLUG}.dev.insee.io
