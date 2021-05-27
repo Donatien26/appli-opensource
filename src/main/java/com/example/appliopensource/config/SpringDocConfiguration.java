@@ -47,17 +47,23 @@ public class SpringDocConfiguration {
     @Autowired
     BuildProperties buildProperties;
 
-    public final String OAUTHSCHEME = "keycloak";
+    public final String OAUTHSCHEME = "oidc";
+    public final String SCHEMEBASIC = "basic";
 
     @Bean
     public OpenAPI customOpenAPIBasicAndOIDC() {
         final OpenAPI openapi = createOpenAPI();
-        openapi.components(new Components().addSecuritySchemes(OAUTHSCHEME,
-                new SecurityScheme().type(SecurityScheme.Type.OAUTH2).in(SecurityScheme.In.HEADER)
-                        .description(issuerDescription)
-                        .flows(new OAuthFlows()
-                                .authorizationCode(new OAuthFlow().authorizationUrl(issuerAuthorizationURL)
-                                        .tokenUrl(issuerTokenURL).refreshUrl(issuerRefreshURL)))));
+        openapi.components(
+                new Components()
+                        .addSecuritySchemes(SCHEMEBASIC,
+                                new SecurityScheme().type(SecurityScheme.Type.HTTP).scheme(SCHEMEBASIC)
+                                        .in(SecurityScheme.In.HEADER).description("Authentification Basic"))
+                        .addSecuritySchemes(OAUTHSCHEME,
+                                new SecurityScheme().type(SecurityScheme.Type.OAUTH2).in(SecurityScheme.In.HEADER)
+                                        .description(issuerDescription)
+                                        .flows(new OAuthFlows().authorizationCode(
+                                                new OAuthFlow().authorizationUrl(issuerAuthorizationURL)
+                                                        .tokenUrl(issuerTokenURL).refreshUrl(issuerRefreshURL)))));
         return openapi;
     }
 
