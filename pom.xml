@@ -98,6 +98,12 @@
 							<goal>build-info</goal>
 						</goals>
 					</execution>
+					<execution>
+						<id>repackage</id>
+						<configuration>
+							<classifier>exec</classifier>
+						</configuration>
+					</execution>
 				</executions>
 			</plugin>
 		</plugins>
