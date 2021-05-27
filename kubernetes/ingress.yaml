@@ -1,0 +1,22 @@
+
+apiVersion: "networking.k8s.io/v1beta1"
+kind: Ingress
+metadata:
+  name: open-demo
+  labels:
+    name: open-demo
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+spec:
+  tls:
+    - hosts:
+        - appli-opensource.dev.insee.io
+  rules:
+    - host: appli-opensource.dev.insee.io
+      http:
+        paths:
+          - pathType: Prefix
+            path: "/"
+            backend:
+              serviceName: open-demo
+              servicePort: port-8080

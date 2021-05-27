@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: open-demo
+spec:
+  selector:
+    matchLabels:
+      app: open-demo
+  template:
+    metadata:
+      labels:
+        app: open-demo
+    spec:
+      containers:
+        - name: open-demo
+          image: "donatien26/appli-opensource:main"
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
