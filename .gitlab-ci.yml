@@ -1,0 +1,26 @@
+stages:
+  - build
+  - docker
+  - deploy
+
+build:
+  stage: build
+  image: maven:3.6.0-jdk-11
+  script:
+    - mvn package
+  artifacts:
+    paths:
+      - target/*.jar
+    expire_in: 1 day
+
+docker:
+  stage: docker
+  variables:
+    DOCKER_TLS_CERTDIR: "/certs"
+  services:
+    - docker:19.03.1-dind
+  image: docker:19.03.1
+  script:
+    - docker build --pull -t "donatien26/appli-opensource:$CI_COMMIT_REF_SLUG" .
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD"
+    - docker push "donatien26/appli-opensource:$CI_COMMIT_REF_SLUG"
