@@ -47,7 +47,12 @@ public class KeycloakConfiguration extends KeycloakWebSecurityConfigurerAdapter 
     protected void configure(HttpSecurity http) throws Exception {
         super.configure(http);
         // Configurations personnalisées
-        http
+        http // disable csrf because of API mode
+                .csrf().disable().sessionManagement().and().exceptionHandling()
+                .authenticationEntryPoint(authenticationEntryPoint()).and()
+                // access h2-console with keycloak
+                .headers().frameOptions().disable().and()
+
                 // delegate logout endpoint to spring security
                 .logout().addLogoutHandler(keycloakLogoutHandler()).logoutUrl("/logout").logoutSuccessUrl("/").and()
                 // espace public obligatoire pour consulter swagger, fonctionne si swagger

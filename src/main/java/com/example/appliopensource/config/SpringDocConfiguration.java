@@ -2,6 +2,7 @@ package com.example.appliopensource.config;
 
 import org.springdoc.core.customizers.OperationCustomizer;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.info.BuildProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,21 +17,32 @@ import io.swagger.v3.oas.models.security.SecurityRequirement;
 import io.swagger.v3.oas.models.security.SecurityScheme;
 
 @Configuration
+
 public class SpringDocConfiguration {
 
-    public String issuerAuthorizationURL = "https://auth.insee.test/auth/realms/agents-insee-interne/protocol/openid-connect/auth";
+    @Value("${springdoc.issuer.url.authorization:}")
+    public String issuerAuthorizationURL;
 
-    public String issuerRefreshURL = "https://auth.insee.test/auth/realms/agents-insee-interne/protocol/openid-connect/token";
+    @Value("${springdoc.issuer.url.refresh:}")
+    public String issuerRefreshURL;
 
-    public String issuerTokenURL = "https://auth.insee.test/auth/realms/agents-insee-interne/protocol/openid-connect/token";
+    @Value("${springdoc.issuer.url.token:}")
+    public String issuerTokenURL;
 
-    public String issuerDescription = "Le super système d'authentification de l'insee";
+    @Value("${springdoc.issuer.description:}")
+    public String issuerDescription;
 
+    @Value("${springdoc.contact.name:}")
     public String contactName = "Donatien ENEMAN";
 
+    @Value("${springdoc.contact.email:}")
     public String contactEmail = "monEmailPasDuToutPrivé@example.com";
 
+    @Value("${springdoc.title:}")
     public String title;
+
+    @Value("${springdoc.description:}")
+    public String description;
 
     @Autowired
     BuildProperties buildProperties;
@@ -54,9 +66,8 @@ public class SpringDocConfiguration {
         if (contactEmail != null) {
             contact = contact.email(contactEmail).name(contactEmail);
         }
-        final OpenAPI openapi = new OpenAPI().info(new Info().title("Swagger application (bientot) opensource")
-                .description("Cette application ne fait rien du tout").version(buildProperties.getVersion())
-                .contact(contact));
+        final OpenAPI openapi = new OpenAPI().info(new Info().title(title).description(description)
+                .version(buildProperties.getVersion()).contact(contact));
 
         return openapi;
     }
